@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 
 export class SignUpController{
     public static async signUp(req: express.Request, res: express.Response){
-        console.log(req.body)
         try {
             await body('username', 'Email is not valid').isEmail().run(req)
             await body('name', "Name should not be empty").notEmpty().run(req)
@@ -26,8 +25,6 @@ export class SignUpController{
                 createdOn: new Date()
             }
             let create = await userModel.create(data)
-            console.log(error)
-            console.log(create)
             return res.send({success: true, message: "Created Successfully", create})
         } catch (error) {
             console.log(error)

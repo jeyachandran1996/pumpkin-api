@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 export class ImagesController{
     public static async getImages(req: express.Request, res: express.Response){
         try {
-            console.log(req.body)
             let query:any = {}
             try {
                 if(req.body.hasOwnProperty('data'))

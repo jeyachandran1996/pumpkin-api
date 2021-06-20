@@ -7,7 +7,6 @@ import { body, validationResult } from 'express-validator';
 
 export class LoginController{
     public static async login(req: express.Request, res: express.Response){
-        console.log(req.body)
         try {
             await body('username', 'Email is not valid').isEmail().run(req)
             await body('password', "Password is empty").notEmpty
@@ -20,7 +19,6 @@ export class LoginController{
                 return res.send({success: false, message: "Invalid Credentials"})
             }
             let pwdCheck = await checkPassword(req.body.password, userData[0]['password'])
-            console.log(userData)
             if(!pwdCheck) return res.send({success: false, message: "Password does not match"})
             let data = {
                 username: userData[0]['username'],
